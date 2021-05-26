@@ -45,6 +45,7 @@
         }
 
     </style>
+    
 
 </head>
 
@@ -56,11 +57,46 @@
 </header>
 
 
+
 <body>
     <div style="width: 1000px;margin-left: auto; margin-right: auto;">
         <aside id="leftmenu">
-            <h4 style="text-align: center;">Software resources<br> that I recommend</h4>
-                       
+            <h4 style="text-align: center;">Resources I recommend<br> </h4>
+            <a href="recommendations.html">Books, podcasts and other great resources!</a>
+            <h4 style="text-align: center;">Contact Me<br> </h4>
+            <!-- <form action="search.html" enctype="application/x-www-form-urlencoded" method="GET">
+                <input name="q">
+                <input type="submit">
+            </form> -->
+            <p></p>
+            <form>
+                <input id="clickMe" type="button" value="Generate Random word" onclick="getRandomWord()" />
+            </form>
+            <p id="randomWord">Tjo</p>
+            <script>
+                function getRandomWord(){
+                    var cars = ["Saab", "Volvo", "BMW"];
+                    var index = Math.floor(Math.random() * cars.length);
+                    document.getElementById("randomWord").innerHTML=cars[index];             
+                }
+            
+            </script>
+            <button onclick="myFunction()">Click me</button>
+
+            <p id="demo"></p>
+
+            <script>
+            function myFunction() {
+            document.getElementById("demo").innerHTML = "Hello World";
+            }
+            </script>
+
+            <!-- <textarea>Your name (required)</textarea>
+            <textarea>Your email address (required)</textarea>
+            <textarea>Subject</textarea>
+            <textarea>Your message</textarea>
+            <button>Send</button> -->
+
 
         </aside>
         <main id="main">
@@ -68,6 +104,8 @@
                 <header><h1 style="font-size: 40px;margin-top: 0px;color:#a593a5">Magnus Code Ramblings </h1></header>
                 
                 <p>Hi, I'm Magnus! I used to be a journalist but five years ago I switched careers and have been working full-time as a software developer ever since. I love it!<br>
+                               
+                    I've mostly done back end work but I'm now diving into web development.<br>
                 </p>
                 <p>
                     <figure>
@@ -75,19 +113,17 @@
                         <figcaption>(That's me next to a plastic hippo.)</figcaption>     
                     </figure>
                 </p>
+                <p>The idea behind this site is :<br>
+                    <ul>
+                        <li>For me to <i>learn more about web development by building things and posting them here!</i></li>
+                        <li>And also to <i>visualize my own learning when it comes to software development.</i></li>
+                    </ul>
+                    <br>
+                    Because learning is fun!<br>
                     
-                <p>               
-                    I've mostly done back end work but I'm now diving into web development.<br>
-                    The idea behind this site is :<br>
-                <ul>
-                    <li>For me to <i>learn more about web development by building things and posting them here!</i></li>
-                    <li>And also to <i>visualize my own learning when it comes to software development.</i></li>
-                </ul>
-                <br>
-                Because learning is fun!<br>
+    
+                    </p>
                 
-
-                </p>
                 <h2>Ongoing projects</h2>
                 <h3> Magnus's Handy ToolBox</h3>
                 <p>The Toolbox contains a bunch of Windows applications I wrote to make my workdays easier.<br>
