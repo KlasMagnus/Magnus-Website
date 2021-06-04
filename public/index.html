@@ -45,7 +45,7 @@
         }
 
     </style>
-    
+    <script type="text/javascript" src="poetry.js"></script>
 
 </head>
 
@@ -70,17 +70,14 @@
             </form> -->
             <p></p>
             <form>
-                <input id="clickMe" type="button" value="Generate Random word" onclick="getRandomWord()" />
+                <input id="clickMe" type="button" value="Generate Poetry" onclick="createPoem()" />
             </form>
-            <p id="randomWord">Tjo</p>
-            <script>
-                function getRandomWord(){
-                    var cars = ["Saab", "Volvo", "BMW"];
-                    var index = Math.floor(Math.random() * cars.length);
-                    document.getElementById("randomWord").innerHTML=cars[index];             
-                }
+            <p id="poetry">Poetry will appear here!</p>
             
-            </script>
+                
+                
+            
+            
             <button onclick="myFunction()">Click me</button>
 
             <p id="demo"></p>
@@ -105,7 +102,7 @@
                 
                 <p>Hi, I'm Magnus! I used to be a journalist but five years ago I switched careers and have been working full-time as a software developer ever since. I love it!<br>
                                
-                    I've mostly done back end work but I'm now diving into web development.<br>
+                    I've mostly done back end work and I'm now diving into web development.<br>
                 </p>
                 <p>
                     <figure>
