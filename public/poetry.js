@@ -8,8 +8,11 @@ function createPoem(){
 
     var targetNoun = ["corn on the cob", "a slimy blob"];
 
-    var poem = "There once was a " + getRandomWordFromArray(subjects) + " named " + getRandomWordFromArray(subjectNames) +
-                " who " + getRandomWordFromArray(adjective) + "."
+    var subject = getRandomWordFromArray(subjects);
+    var subjectName = getRandomWordFromArray(subjectNames);
+
+    var poem = "There once was a " + subject + " named " + subjectName +
+                " who " + getRandomWordFromArray(adjective) + getRandomWordFromArray(getWordsThatRhyme(subjectName, targetNoun));
     document.getElementById("poetry").innerHTML=poem;
 
 }
@@ -19,13 +22,19 @@ function getRandomWordFromArray(arrayOfWords){
     return arrayOfWords[index];
 }
 
-function getWordsThatRhyme(arrayOfWords){
+function getWordsThatRhyme(word, potentialRhymes){
 
-    //TODO: some kind of map?
+    lastSyllableToCheck = getLastSyllable(word);
 
-    arrayofWords.forEach(element => {
-        
+    var rhymes = [];
+
+    potentialRhymes.forEach(element => {
+        //if match put in rhymes
+        if (getLastSyllable(element) == lastSyllableToCheck){
+            rhymes.push(element);
+        }
     });
+    return rhymes;
 
 }
 
@@ -33,12 +42,10 @@ function getLastSyllable(word){
     
     var vowels = ["a", "e", "i",  "o", "u"];
 
-    var lastVowelPosition;
-    
     //for now we ignore last position of word. TODO: add support for words with vowel in last position, such as 'take'
-    for (var lastVowelPosition = word.length-1; i > 0; i--) {
-        if (word.getCharAt(lastVowelPosition).find(vowels)){
-            return word.substring(lastVowelPosition);
+    for (var i = word.length-1; i > 0; i--) {
+        if (vowels.indexOf(word[i])){
+            return word.substring(i);
 
         }
     }
