@@ -3,7 +3,7 @@ function readFile(file) {
     reader.addEventListener('load', (event) => {
       const result = event.target.result;
       // Do something with result
-      console.log(result);
+      parseFile(result);
     });
   
     reader.addEventListener('progress', (event) => {
@@ -13,4 +13,13 @@ function readFile(file) {
       }
     });
     reader.readAsText(file);
+  }
+
+  function parseFile(stringToParse)
+  {
+      counter = 0;
+      let lines = stringToParse.split('\n')
+      lines.forEach(element => {console.log(element)
+          console.log(counter);counter++;
+      });
   }
