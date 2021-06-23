@@ -46,6 +46,7 @@
 
     </style>
     <script type="text/javascript" src="poetry.js"></script>
+    <script type="text/javascript" src="parseDictionary.js"></script>
 
 </head>
 
@@ -74,7 +75,9 @@
             </form>
             <p id="poetry">Poetry will appear here!</p>
             
-                
+            <form>
+                <input type="file" onchange="readFile(this.files[0])">
+            </form>    
                 
             
             
