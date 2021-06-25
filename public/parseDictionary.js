@@ -17,9 +17,58 @@ function readFile(file) {
 
   function parseFile(stringToParse)
   {
-      counter = 0;
+    currentWord = "";
+    previousLineIsWord = false;
+
+    var entries = []
+
       let lines = stringToParse.split('\n')
-      lines.forEach(element => {console.log(element)
-          console.log(counter);counter++;
+      lines.forEach(element => {
+        
+        if (/\S/.test(element) === false) {
+          //only whitespace-characters on this row, move along...
+          return;
+        }
+
+
+        if (previousLineIsWord)
+        {
+          var myEntry = new Entry(currentWord, element);
+          entries.push(myEntry);
+
+          const jsonObject = JSON.stringify(myEntry);
+          console.log(jsonObject);
+          
+
+          previousLineIsWord = false;
+        }
+        
+        if (isUpperCase(element))
+        {
+          currentWord = element;
+          previousLineIsWord = true;
+        }
+
+
       });
+
+      download(JSON.stringify(entries), 'json.txt', 'text/plain');
   }
+
+  function Entry(word, wordclass)
+  {
+   this.word = word;
+   this.wordclass = wordclass;
+  }
+
+  function isUpperCase(str) {
+    return str === str.toUpperCase();
+}
+
+function download(content, fileName, contentType) {
+  var a = document.createElement("a");
+  var file = new Blob([content], {type: contentType});
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
