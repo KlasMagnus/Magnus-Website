@@ -33,7 +33,11 @@ function readFile(file) {
 
         if (previousLineIsWord)
         {
-          var myEntry = new Entry(currentWord, element);
+
+          var wordClass = getWordClass(element);
+
+
+          var myEntry = new Entry(currentWord, wordClass);
           entries.push(myEntry);
 
           const jsonObject = JSON.stringify(myEntry);
@@ -71,4 +75,44 @@ function download(content, fileName, contentType) {
   a.href = URL.createObjectURL(file);
   a.download = fileName;
   a.click();
+} 
+
+function getWordClass(text)
+{
+  if (text.includes(" n."))
+  {
+    return "noun";
+  }
+  else if (text.includes(" v."))
+  {
+    return "verb";
+  }
+  else if (text.includes(" a."))
+  {
+    return "adjective";
+  }
+  else if (text.includes(" adv."))
+  {
+    return "adverb";
+  }
+  else if (text.includes(" pron."))
+  {
+    return "pronoun";
+  }
+  else if (text.includes(" prep."))
+  {
+    return "preposition";
+  }
+  else if (text.includes(" conj."))
+  {
+    return "conjunction";
+  }
+  else
+  {
+    return "unknown";
+  }
+  
 }
+
+// now create wordclasses properly and also perhaps make different collections in mongodb for word classes
+// then get the cmudict into mongodb as well
