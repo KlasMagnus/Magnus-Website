@@ -1,0 +1,46 @@
+const http = require('http')
+
+//const {parse: parseQuery} = require('queryString')
+
+const serverOrigin = "http://localhost:3000"
+
+function start(route){
+
+  function onRequest(request, response) {
+    
+    //console.log(request)
+    //const myURL = new URL("/foo", "http://localhost:3000")
+    
+    console.log(aURL)
+    const myURL = new URL(request.URL, "http://localhost:3000")
+
+    const pathName = JSON.stringify(myURL.pathname)    
+    // let pathName = parseurl
+    console.log("Request received for " + pathName)
+
+    route(pathName)
+
+    response.writeHead(200, {"Content-Type" : "text/plain"})
+    response.write("Hello world")
+    //response.end(`Hello, ${query.name}!\n`)
+  }
+  
+  http.createServer(onRequest).listen(3000)
+  
+  console.log("Server has started")
+
+}
+
+exports.start = start
+
+
+
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.end('Hello World!\n')
+// })
+
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`)
+// })
