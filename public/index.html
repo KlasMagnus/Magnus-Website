@@ -82,8 +82,18 @@
                 <input type="file" onchange="readFile(this.files[0])" >
             </form>    
                 
-            
-            
+            <p>Temp: ping node server</p>
+            <form>
+                <input id="clickMe" type="button" value="Ping server" onclick="pingServer()" />
+            </form>
+            <script>
+                function pingServer() {
+                    fetch('http://localhost:3000/testing')
+                }
+            </script>
+
+
+
             <button onclick="myFunction()">Click me</button>
 
             <p id="demo"></p>
