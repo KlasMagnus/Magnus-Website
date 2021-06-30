@@ -88,9 +88,14 @@
             </form>
             <script>
                 function pingServer() {
-                    fetch('http://localhost:3000/testing')
-                }
+                    fetch('http://localhost:3000/start', 
+                    { method: 'GET', mode: 'no-cors', headers: {'Content-type': 'application/json;charset=UTF-8'}})
+                    .then(response => response.json())  // convert to json
+                    .then(json => console.log(json))    //print data to console
+                    .catch(err => console.log('Request Failed', err)); // Catch errors
+                };
             </script>
+            <p id="serverResultHere"></p>
 
 
 
