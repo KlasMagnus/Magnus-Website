@@ -5,7 +5,7 @@ const url = require('url')
 
 const serverOrigin = "http://localhost:3000"
 
-function start(route){
+function start(route, handle){
 
   function onRequest(request, response) {
    
@@ -26,9 +26,9 @@ function start(route){
 
     // const pathName = JSON.stringify(myURL.pathname)    
     // let pathName = parseurl
-    console.log("Request received for " + pathName)
+    // console.log("Request received for " + pathName)
 
-    route(pathName)
+    route(handle, method, url)
 
     response.writeHead(200, {"Content-Type" : "text/plain"})
     response.write("Hello world")
