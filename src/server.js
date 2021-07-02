@@ -10,7 +10,7 @@ function start(route, handle){
   function onRequest(request, response) {
    
     const { method, url } = request;
-    console.log(method)
+    //console.log(method)
     console.log(url)
     // const myURL = request.URL
     // console.log(myURL.URL)
@@ -28,11 +28,9 @@ function start(route, handle){
     // let pathName = parseurl
     // console.log("Request received for " + pathName)
 
-    route(handle, method, url)
-
-    response.writeHead(200, {"Content-Type" : "text/plain"})
-    response.write("Hello world")
-    //response.end(`Hello, ${query.name}!\n`)
+    
+    
+    route(handle, url, response)
   }
   
   http.createServer(onRequest).listen(3000)
