@@ -1,5 +1,5 @@
 const http = require('http')
-const url = require('url')
+//const url = require('url')
 
 //const {parse: parseQuery} = require('queryString')
 
@@ -10,8 +10,9 @@ function start(route, handle){
   function onRequest(request, response) {
    
     const { method, url } = request;
-    //console.log(method)
-    console.log(url)
+
+    
+    
     // const myURL = request.URL
     // console.log(myURL.URL)
 
