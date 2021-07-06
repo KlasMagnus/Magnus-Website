@@ -86,16 +86,30 @@
             <form>
                 <input id="clickMe" type="button" value="Ping server" onclick="pingServer()" />
             </form>
-            <script>
-                function pingServer() {
-                    fetch('http://localhost:3000/start', 
-                    { method: 'GET', mode: 'no-cors', headers: {'Content-type': 'application/json;charset=UTF-8'}})
-                    .then(response => response.json())  // convert to json
-                    .then(json => console.log(json))    //print data to console
-                    .catch(err => console.log('Request Failed', err)); // Catch errors
-                };
-            </script>
             <p id="serverResultHere"></p>
+            <script>
+                async function pingServer() {
+                    let response = await fetch('http://localhost:3000/q=queryDb', 
+                    { method: 'GET', headers: {'Content-type': 'text/plain;charset=UTF-8'}})
+                    
+                    console.log(response.status); // 200
+                    console.log(response.statusText); // OK
+
+                    let data = await response.text();
+                    document.getElementById("serverResultHere").innerText = data
+                    // .then(response => response.json())  // convert to json
+                    // .then(json => console.log(json))    //print data to console
+                    // .catch(err => console.log('Request Failed', err)); // Catch errors
+                };
+
+                // async function pingServer() {
+                //     let response = await fetch('http://localhost:3000/q=queryDb');
+                //     let data = await response.text();
+                //     console.log(data);
+                // }
+
+            </script>
+            
 
 
 
