@@ -10,7 +10,7 @@ function start(params, response) {
     
     exec("dir /a", function (error, stdout, stderr) {
         response.writeHead(200, {"Content-Type": "text/plain"});
-        response.write(stdout);
+        response.setheader("Access-Control-Allow-Origin", "*");
         response.end();
     });
     
@@ -25,14 +25,25 @@ function queryDb(params, response) {
         console.log(pair[0]+ ', '+ pair[1]);
      }
 
+     var endOfWord = pair[0].substring(1).toUpperCase()
+     var regExedEndOfWord = '/' + endOfWord + '$/i'
+     console.log(endOfWord)
+     console.log(regExedEndOfWord)
+
      console.log("Querying Mongo DB")
      
 
      mongoClient.connect(mongoURL, function(err, db) {
         if (err) throw err;
         var dbo = db.db("webster");
-        var query = { wordclass: "preposition" };
-        dbo.collection("words").find(query).toArray(function(err, result) {
+        //var query = { wordclass: "preposition" };
+        //Starts with Ro
+        //var query = { wordclass: "noun", word: {'$regex' : '^Ro', '$options' : 'i'}}
+        var query = { wordclass: "noun", word: {'$regex' : endOfWord + "$", '$options' : 'i'}}
+
+
+        //dbo.collection("words").find(query).toArray(function(err, result)
+        dbo.collection("words").find({"word": /^M/}).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
           
@@ -41,7 +52,7 @@ function queryDb(params, response) {
       });
 
     
-    response.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
+    response.setHeader('Access-Control-Allow-Origin', '*')
     response.writeHead(200, {"Content-Type": "text/plain"});
     response.write("queryDb was called");
     
