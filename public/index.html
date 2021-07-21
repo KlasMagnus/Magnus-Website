@@ -71,7 +71,7 @@
             </form> -->
             <p></p>
             <form>
-                <input id="clickMe" type="button" value="Generate Poetry" onclick="createPoem()" />
+                <input id="clickMe" type="button" value="Generate Poetry (locally)" onclick="createPoem()" />
             </form>
             <p id="poetry">Poetry will appear here!</p>
             
@@ -81,15 +81,34 @@
             <form>
                 <input type="file" onchange="readFile(this.files[0])" >
             </form>    
-                
-            <p>Temp: ping node server</p>
+            
+            
+            
+
+            <p>Generate poem on node js server!</p>
             <form>
-                <input id="clickMe" type="button" value="Ping server" onclick="pingServer()" />
+                <label for="name-select">Who should the poem be about?</label>
+
+                <select name="names" id="name-select">
+                    <option value="">--Please choose an option--</option>
+                    <option value="lina">Lina</option>
+                    <option value="bob">Bob</option>
+                    <option value="mac">Mac</option>
+                    
+                </select>
+                <input id="clickMe" type="button" value="Generate poetry on server" onclick="generatePoetryOnServer()" />
             </form>
             <p id="serverResultHere"></p>
             <script>
-                async function pingServer() {
-                    let response = await fetch('http://localhost:3000/q=queryDb', 
+                async function generatePoetryOnServer() {
+
+                    var x = document.getElementById("name-select");
+                    var i = x.selectedIndex;
+                    var selectedName = x.options[i].text;
+                    
+
+
+                    let response = await fetch('http://localhost:3000/q=queryDb&' + selectedName, 
                     { method: 'GET', headers: {'Content-type': 'text/plain;charset=UTF-8'}})
                     
                     console.log(response.status); // 200
