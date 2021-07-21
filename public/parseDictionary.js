@@ -49,7 +49,7 @@ function readFile(file) {
         
         if (isUpperCase(element))
         {
-          currentWord = element;
+          currentWord = element.replace( /[\r\n]+/gm, "" );
           previousLineIsWord = true;
         }
 

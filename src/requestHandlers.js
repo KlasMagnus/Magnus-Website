@@ -25,10 +25,10 @@ function queryDb(params, response) {
         console.log(pair[0]+ ', '+ pair[1]);
      }
 
-     var endOfWord = pair[0].substring(1).toUpperCase()
+     var endOfWord = pair[0].substring(1).toUpperCase() + '$'
      var regExedEndOfWord = '/' + endOfWord + '$/i'
      console.log(endOfWord)
-     console.log(regExedEndOfWord)
+     //console.log(regExedEndOfWord)
 
      console.log("Querying Mongo DB")
      
@@ -39,11 +39,14 @@ function queryDb(params, response) {
         //var query = { wordclass: "preposition" };
         //Starts with Ro
         //var query = { wordclass: "noun", word: {'$regex' : '^Ro', '$options' : 'i'}}
-        var query = { wordclass: "noun", word: {'$regex' : endOfWord + "$", '$options' : 'i'}}
+        var query = { wordclass: "noun", word: {'$regex' : endOfWord, '$options' : 'i'}}
+        //var query = {word: {'$regex' : endOfWord + '$', '$options' : 'i'}}
+
+        console.log(query);
 
 
         //dbo.collection("words").find(query).toArray(function(err, result)
-        dbo.collection("words").find({"word": /^M/}).toArray(function(err, result) {
+        dbo.collection("words").find(query).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
           
