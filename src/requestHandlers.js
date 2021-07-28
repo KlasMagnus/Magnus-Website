@@ -32,26 +32,17 @@ function getLimerick(params, response) {
 
      
      var query = { wordclass: "noun", word: {'$regex' : endOfWord, '$options' : 'i'}}
-     var result = queryDB(query)
+     queryDB(query, response)
 
 
-     behöver fixa så detta blir asynkront och fint
+     
 
-     const myJSON = JSON.stringify(result);
-
-     console.log("will now return\n" + myJSON)
-
-    
-    response.setHeader('Access-Control-Allow-Origin', '*')
-    //response.setHeader('Access-Control-Allow-Headers', 'application/json')
-    response.writeHead(200, {"Content-Type": "application/json"});
-    //response.write(myJSON);
-    response.end(myJSON);
+     
     
     // response.end();
 }
 
-function queryDB(query){
+function queryDB(query, response){
     console.log("Querying Mongo DB")
     console.log(query);
     mongoClient.connect(mongoURL, function(err, db) {
@@ -72,7 +63,17 @@ function queryDB(query){
       console.log(result);
       
       db.close();
-      return result;
+      
+      const myJSON = JSON.stringify(result);
+      
+      console.log("will now return\n" + myJSON)
+      response.setHeader('Access-Control-Allow-Origin', '*')
+      //response.setHeader('Access-Control-Allow-Headers', 'application/json')
+      response.writeHead(200, {"Content-Type": "application/json"});
+      //response.write(myJSON);
+      response.end(myJSON);
+
+
       });
     });
 }
