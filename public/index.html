@@ -108,14 +108,23 @@
                     
 
 
-                    let response = await fetch('http://localhost:3000/q=queryDb&' + selectedName, 
-                    { method: 'GET', headers: {'Content-type': 'text/plain;charset=UTF-8'}})
+                    let response = await fetch('http://localhost:3000/q=getLimerick&' + selectedName, 
+                    { method: 'GET'})
+                    // { method: 'GET', headers: {'Content-type': 'application/json'}})
+                    // { method: 'GET', headers: {'Content-type': 'application/json'}})
                     
                     console.log(response.status); // 200
                     console.log(response.statusText); // OK
 
                     let data = await response.text();
+                    console.log("server response data:\n" + data)
+
+                    
+
+
                     document.getElementById("serverResultHere").innerText = data
+
+
                     // .then(response => response.json())  // convert to json
                     // .then(json => console.log(json))    //print data to console
                     // .catch(err => console.log('Request Failed', err)); // Catch errors
