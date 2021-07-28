@@ -17,9 +17,9 @@ function start(params, response) {
     
 }
 
-function queryDb(params, response) {
+function getLimerick(params, response) {
 
-    console.log("Request handler 'queryDb' was called.")
+    console.log("Request handler 'getLimerick' was called.")
 
     for(var pair of params.entries()) {
         console.log(pair[0]+ ', '+ pair[1]);
@@ -30,37 +30,52 @@ function queryDb(params, response) {
      console.log(endOfWord)
      //console.log(regExedEndOfWord)
 
-     console.log("Querying Mongo DB")
      
-
-     mongoClient.connect(mongoURL, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("webster");
-        //var query = { wordclass: "preposition" };
-        //Starts with Ro
-        //var query = { wordclass: "noun", word: {'$regex' : '^Ro', '$options' : 'i'}}
-        var query = { wordclass: "noun", word: {'$regex' : endOfWord, '$options' : 'i'}}
-        //var query = {word: {'$regex' : endOfWord + '$', '$options' : 'i'}}
-
-        console.log(query);
+     var query = { wordclass: "noun", word: {'$regex' : endOfWord, '$options' : 'i'}}
+     var result = queryDB(query)
 
 
-        //dbo.collection("words").find(query).toArray(function(err, result)
-        dbo.collection("words").find(query).toArray(function(err, result) {
-          if (err) throw err;
-          console.log(result);
-          
-          db.close();
-        });
-      });
+     behöver fixa så detta blir asynkront och fint
+
+     const myJSON = JSON.stringify(result);
+
+     console.log("will now return\n" + myJSON)
 
     
     response.setHeader('Access-Control-Allow-Origin', '*')
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("queryDb was called");
+    //response.setHeader('Access-Control-Allow-Headers', 'application/json')
+    response.writeHead(200, {"Content-Type": "application/json"});
+    //response.write(myJSON);
+    response.end(myJSON);
     
-    response.end();
+    // response.end();
+}
+
+function queryDB(query){
+    console.log("Querying Mongo DB")
+    console.log(query);
+    mongoClient.connect(mongoURL, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("webster");
+    //var query = { wordclass: "preposition" };
+    //Starts with Ro
+    //var query = { wordclass: "noun", word: {'$regex' : '^Ro', '$options' : 'i'}}
+    
+    //var query = {word: {'$regex' : endOfWord + '$', '$options' : 'i'}}
+
+    
+
+
+    //dbo.collection("words").find(query).toArray(function(err, result)
+      dbo.collection("words").find(query).toArray(function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      
+      db.close();
+      return result;
+      });
+    });
 }
 
 exports.start = start
-exports.queryDb = queryDb
+exports.getLimerick = getLimerick

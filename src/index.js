@@ -5,6 +5,6 @@ const requestHandlers = require("./requestHandlers")
 const handle = {}
 handle[""] = requestHandlers.start
 handle["start"] = requestHandlers.start
-handle["queryDb"] = requestHandlers.queryDb
+handle["getLimerick"] = requestHandlers.getLimerick
 
 server.start(router.route, handle)
