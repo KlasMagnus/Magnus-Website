@@ -116,13 +116,18 @@
                     console.log(response.status); // 200
                     console.log(response.statusText); // OK
 
-                    let data = await response.text();
+                    let data = await response.json();
                     console.log("server response data:\n" + data)
+
+                    var names = ""
+                    data.forEach(element => {
+                        names += " " + element.word + "\n"
+                    });
 
                     
 
 
-                    document.getElementById("serverResultHere").innerText = data
+                    document.getElementById("serverResultHere").innerText = selectedName + " rhymes with " + names
 
 
                     // .then(response => response.json())  // convert to json
