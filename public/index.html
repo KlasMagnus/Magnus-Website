@@ -142,11 +142,47 @@
                 // }
 
             </script>
+            <form>
+                <label for="queryConceptNet">Enter a word to query on ConceptNet:</label>
+
+                <input type="text" id="queryConceptNet" name="queryConceptNet" required
+                minlength="4" maxlength="30" size="10">
+                <button onclick="runQuery()">Run query on ConceptNet</button>
             
+            <p></p>
+
+            <script>
+                function runQuery() {
+                    let query = queryConceptNet.value
+                    console.log('Query = ' + query)
+
+                    let response = fetch('https://api.conceptnet.io/c/en/' + query, 
+                    { method: 'GET'})
+
+                    console.log('HTTP STATUS CODE:' + response.status); // 200
+                    console.log('HTTP STATUS TEXT' + response.statusText); // OK
+
+                    let data = response.json();
+                    console.log("server response data:\n" + data)
+
+                    var names = ""
+                    data.forEach(element => {
+                        names += " " + element.word + "\n"
+                    });
+
+                    
+
+
+                    document.getElementById("serverResultHere").innerText = "ConceptNet returned:\n" + names
+                }
+            </script>
 
 
 
             <button onclick="myFunction()">Click me</button>
+
+            </form>
+            
 
             <p id="demo"></p>
 
