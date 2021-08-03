@@ -154,27 +154,57 @@
             <script>
                 function runQuery() {
                     let query = queryConceptNet.value
-                    console.log('Query = ' + query)
+                    console.log('Query word = ' + query)
+                    console.log('full query = ' + 'http://api.conceptnet.io/c/en/' + query )
 
-                    let response = fetch('https://api.conceptnet.io/c/en/' + query, 
-                    { method: 'GET'})
+                    // let response = fetch('http://api.conceptnet.io/c/en/' + query)
 
-                    console.log('HTTP STATUS CODE:' + response.status); // 200
-                    console.log('HTTP STATUS TEXT' + response.statusText); // OK
+                    fetch('http://api.conceptnet.io/c/en/' + query , 
+                    {method: 'get', headers: {'Accept': 'application/json','Content-Type': 'application/json', 'credentials': 'include'}})
+                    .then(function(response) {
+                        console.log("Received response")
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
 
-                    let data = response.json();
-                    console.log("server response data:\n" + data)
+                    console.log(response.body)
 
-                    var names = ""
-                    data.forEach(element => {
-                        names += " " + element.word + "\n"
-                    });
+                    })
+                    .catch(function(e) {
+                        console.log("CAUGHT: " + e)
+                        console.log(e instanceof TypeError)  // true
+                        console.log(e.message)               // "null has no properties"
+                        console.log(e.name)                  // "TypeError"
+                        console.log(e.fileName)              // "Scratchpad/1"
+                        console.log(e.lineNumber)            // 2
+                        console.log(e.columnNumber)          // 2
+                        console.log(e.stack)                 // "@Scratchpad/2:2:3\n"
+                    })
+                };
+                                    // { method: 'GET'})
+
+                    // let response = await fetch('http://api.conceptnet.io/c/en/example', 
+                    // { method: 'GET'})
+                    
+
+                    
+
+                    // console.log('HTTP STATUS CODE:' + response.status); // 200
+                    // console.log('HTTP STATUS TEXT' + response.statusText); // OK
+
+                    // let data = await response.json();
+                    // console.log("server response data:\n" + data)
+
+                    // var ids = ""
+                    // data.forEach(element => {
+                    //     ids += " " + element.id + "\n"
+                    // });
 
                     
 
 
-                    document.getElementById("serverResultHere").innerText = "ConceptNet returned:\n" + names
-                }
+                    //document.getElementById("serverResultHere").innerText = "ConceptNet returned:\n" + ids
+                
             </script>
 
 
