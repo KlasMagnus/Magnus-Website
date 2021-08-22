@@ -59,8 +59,22 @@ function queryDB(query, response){
       
       const myJSON = JSON.stringify(result);
       
+      // Create array of object keys, ["311", "310", ...]
+        const keys = Object.keys(result)
+
+        // Generate random index based on number of keys
+        const randIndex = Math.floor(Math.random() * keys.length)
+
+        // Select a key from the array of keys using the random index
+        const randKey = keys[randIndex]
+
+        // Use the key to get the corresponding name from the "names" object
+        const name = result[randKey]
+            
+      console.log("Chose " + name.word.toLowerCase() + " from mongoDb result. Will now query ConceptNet with this")
+
       //test conceptNet
-      queryConceptNet("bear");
+      queryConceptNet(name.word.toLowerCase());
 
 
       console.log("will now return\n" + myJSON)
@@ -92,7 +106,34 @@ function queryConceptNet(word) {
 
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-            console.log(data);
+
+            const conceptNode = JSON.parse(data);
+
+
+
+            console.log('No of edges: ' + conceptNode.edges.length)
+
+            //console.log("Edges:\n" + conceptNode.edges);
+
+            for(var i = 0; i < conceptNode.edges.length; i++)
+            {
+                var edge = conceptNode.edges[i];
+                //console.log(edge)
+                console.log(edge.start.label)
+                console.log(edge.license)
+                console.log(edge.surfaceText)
+
+            }
+                
+
+
+            // array.forEach(element => {
+            //     element.
+            // });
+
+
+
+            //console.log(data);
         });
 
         }).on("error", (err) => {
