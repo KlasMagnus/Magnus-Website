@@ -119,9 +119,8 @@ function queryConceptNet(word) {
             {
                 var edge = conceptNode.edges[i];
                 //console.log(edge)
-                console.log(edge.start.label)
-                console.log(edge.license)
-                console.log(edge.surfaceText)
+                console.log(edge.start.label + " " + edge.rel.label + " " + edge.end.label)
+                
 
             }
                 
@@ -142,6 +141,8 @@ function queryConceptNet(word) {
     })
 
 }
+
+function HandleEdge(){}
 
 exports.start = start
 exports.getLimerick = getLimerick
