@@ -141,24 +141,37 @@ function queryConceptNetWithPromise(word) {
   return new Promise(function (resolve, reject) {
     const req = https.get(
       "https://api.conceptnet.io:443/c/en/" + word,
-      function (res) {
-        // on bad status, reject
-        if (res.statusCode < 200 || res.statusCode >= 300) {
-          return reject(new Error("statusCode=" + res.statusCode));
-        }
-        // on response data, cumulate it
-        let body = [];
-        res.on("data", function (chunk) {
-          body.push(chunk);
+      (resp) => {
+        let data = "";
+
+        // A chunk of data has been received.
+        resp.on("data", (chunk) => {
+          data += chunk;
         });
-        // on end, parse and resolve
-        res.on("end", function () {
-          try {
-            body = JSON.parse(Buffer.concat(body).toString());
-          } catch (e) {
-            reject(e);
+
+        // The whole response has been received. Print out the result.
+        resp.on("end", () => {
+          const conceptNode = JSON.parse(data);
+
+          console.log("No of edges: " + conceptNode.edges.length);
+
+          //console.log("Edges:\n" + conceptNode.edges);
+
+          for (var i = 0; i < conceptNode.edges.length; i++) {
+            var edge = conceptNode.edges[i];
+            //console.log(edge)
+            console.log(
+              edge.start.label + " " + edge.rel.label + " " + edge.end.label
+            );
+
+            resolve(conceptNode);
           }
-          resolve(body);
+
+          // array.forEach(element => {
+          //     element.
+          // });
+
+          //console.log(data);
         });
       }
     );
