@@ -1,0 +1,81 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #d6efff;
+  background: -moz-linear-gradient(left, #d6efff 0%, #144e75 100%);
+  background: -webkit-linear-gradient(left, #d6efff 0%, #144e75 100%);
+  background: linear-gradient(to right, #d6efff 0%, #144e75 100%);
+}
+header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.loaderHidden {
+  /* display: none; */
+  visibility: hidden;
+}
+.loader {
+  position: fixed;
+  top: 80%;
+  right: -100%;
+  left: -100%;
+  bottom: -100%;
+  margin: auto;
+  z-index: 0;
+
+  overflow: hidden;
+  box-shadow: -5px -5px -5px rgba(255, 255, 255, 0.1),
+    10px 10px 10px rgba(0, 0, 0, 0.4),
+    inset -5px -5px -5px rgba(255, 255, 255, 0.2),
+    inset 10px 10px 10px rgba(0, 0, 0, 0.4);
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.loader:before {
+  position: absolute;
+  content: "";
+  z-index: 10;
+  opacity: 10;
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
+  background-color: #d6efff;
+  opacity: 0;
+  border-radius: 50%;
+  box-shadow: -5px -5px -5px rgba(255, 255, 255, 0.1),
+    10px 10px 10px rgba(0, 0, 0, 0.4),
+    inset -5px -5px -5px rgba(255, 255, 255, 0.2),
+    inset 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+.loader span {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  filter: blur(20px);
+  border-radius: 50%;
+  background: linear-gradient(#d6efff, #3c9fb1, #144e75);
+  animation: loader 0.6s linear infinite;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

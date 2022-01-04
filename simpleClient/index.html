@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Bad Poetry Generator</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="poetry.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Bad Poetry Generator</h1>
+      <p>
+        Have you ever dreamt about writing bad poetry?<br />
+        Now you don't have to! Let us do it for you.<br />
+      </p>
+      <form id="form">
+        <label for="fpoem"
+          >What should your poem be about (one word only)?</label
+        ><br />
+        <input type="text" id="fpoem" name="fpoem" value="" /><br />
+
+        <p>Is your word a name?</p>
+        <input type="radio" id="name" name="isName" value="Yes" />
+        <label for="name">Yes</label><br />
+        <input type="radio" id="word" name="isName" value="No" />
+        <label for="word">No</label><br />
+        <p></p>
+        <input type="button" id="createButton" value="Create poem" />
+      </form>
+      <div id="myLoader" class="loaderHidden"><p></p><span></span></div>
+      <h3 id="results"></h1>
+    </header>
+
+    
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <script src="" async defer></script>
+  </body>
+</html>
